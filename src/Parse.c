@@ -1,5 +1,8 @@
-#include <main.h>
+#include <parser.h>
 
+// Expression → Term (('+' | '-') Term)*
+// Term       → Factor (('*' | '/') Factor)*
+// Factor     → Number | '(' Expression ')'
 
 Node *create_num_node(int value)
 {
@@ -23,17 +26,14 @@ Node *create_op_node(char op, Node *left, Node *right)
 	return (node);
 }
 
-// Expression → Term (('+' | '-') Term)*
-// Term       → Factor (('*' | '/') Factor)*
-// Factor     → Number | '(' Expression ')'
-
 Node  *parse_term(TokenScanner *scanner) // + | -
 {
 	Node *left;
 	Node *right;
 
 	left = parse_factor(scanner);
-	while ((scanner->pos < scanner->end) && ((scanner->tokens[scanner->pos].type == DEV) || scanner->tokens[scanner->pos].type == MUL))
+	while ((scanner->pos < scanner->end) && ((scanner->tokens[scanner->pos].type == DEV)
+		|| scanner->tokens[scanner->pos].type == MUL))
 	{
 		char operator = scanner->tokens[scanner->pos].data.operator;
 		scanner->pos++;
@@ -47,7 +47,6 @@ Node  *parse_factor(TokenScanner *scanner) // Number | ( | )
 {
 	Node *node;
 
-	// printf("HERE: %s\n", type_asstr(scanner->tokens[scanner->pos].type));
 	node = NULL;
 	switch (scanner->tokens[scanner->pos].type)
 	{
@@ -116,4 +115,3 @@ void print_ast(Node *root, int level)
 		print_ast(root->data.binary_op.right, level + 1);
 	}
 }
-

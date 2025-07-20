@@ -1,10 +1,10 @@
-SRCS=Token.c Parse.c Eval.c
+SRCS=./src/Token.c ./src/Parse.c ./src/Eval.c
 OBJS=$(SRCS:%.c=%.o)
 NAME=parser
 CC=cc
 LIBS=
-INCLUDE=-I.
-MAIN=./main.c
+INCLUDE=-I./include/
+MAIN=./src/main.c
 CFLAGS=-Wall -Wextra -Werror $(INCLUDE)
 RM=rm -f
 

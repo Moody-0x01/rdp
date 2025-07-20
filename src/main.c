@@ -1,4 +1,4 @@
-#include "./main.h"
+#include <parser.h>
 
 int main(int ac, char **av)
 {
