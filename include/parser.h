@@ -9,6 +9,14 @@
 #define MAX_TOKENS 128
 // TODO: Make a mini tokenizer
 // TODO: Make parser to parse the tokens
+
+typedef struct s_expr
+{
+	const char *src;
+	size_t		cur;
+	int			on_error;
+} t_expr;
+
 typedef enum TType {
 	PLUS = 0,
 	MINUS,
@@ -67,4 +75,9 @@ Node  *parse_expression(TokenScanner *scanner); // Expr
 void print_ast(Node *root, int level);
 
 int eval(Node *tree);
+
+// Inplace
+int	parse_(t_expr *const expr);
+int parse_term_(t_expr *const expr);
+int parse_factor_(t_expr *const expr);
 #endif // !MAIN_H
